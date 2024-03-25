@@ -4,6 +4,8 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import PokeSearchResult from "./components/PokeSearchResults/PokeSearchResults";
 import PageHeader from "./components/PageHeader/PageHeader";
 import PokemonCard from "./components/Card/Card";
+import { StyledCardsContainer } from "./components/PokemonList/styledPokemonList";
+import PokemonList from "./components/PokemonList";
 
 function App() {
   const [pokemonsData, setPokemonsData] = useState([]);
@@ -49,9 +51,9 @@ function App() {
           <SearchBox setPokemonsData={setPokemonsData} />
           <PokeSearchResult pokemonsData={pokemonsData} />
         </div>
-        <div>
+        <StyledCardsContainer>
           <PokemonCard pokemon={pokemonsData} loading={loading} />
-        </div>
+        </StyledCardsContainer>
       </main>
     </div>
   );

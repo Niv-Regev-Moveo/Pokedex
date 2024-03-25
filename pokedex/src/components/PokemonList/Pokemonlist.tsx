@@ -1,10 +1,10 @@
 import PokemonCard from "../Card/Card";
 
-const PokemonList = ({ props }: any) => {
+const PokemonList = ({ pokemonsData, loading }: any) => {
   return (
-    <>
-      <PokemonCard></PokemonCard>
-    </>
+    <div>
+      <PokemonCard pokemon={pokemonsData} loading={loading} />
+    </div>
   );
 };
 

@@ -1,4 +1,5 @@
 import Navbar from "../NavBar/NavBar";
+import { styledPageHeader, styledNavBarPages } from "./styledPageHeader";
 
 type PageHeaderProps = {
   homePageTitle: string;

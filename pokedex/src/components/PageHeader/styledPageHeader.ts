@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const styledTitle = styled.h1`
-  color: black;
+export const styledPageHeader = styled.h1`
+  color: blue;
 `;
 
-export default styledTitle;
+export const styledNavBarPages = styled.div``;

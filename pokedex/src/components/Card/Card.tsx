@@ -1,24 +1,30 @@
-import StyledCard from "./styledCard";
-
-type PokemonCardProps = {};
+import {
+  StyledCard,
+  StyledCardTop,
+  StyledImage,
+  StyledPokemonName,
+  StyledImageDiv,
+} from "./styledCard";
 
 const PokemonCard = ({ pokemon, loading }: any) => {
   return (
-    <StyledCard>
+    <>
       {loading ? (
         <h1> Loading...</h1>
       ) : (
         pokemon.map((item: any) => {
           return (
-            <div>
-              <h3>{item.id}</h3>
-              <img src={item.sprites.front_default} alt={""} />
-              <h1>{item.name}</h1>
-            </div>
+            <StyledCard>
+              <StyledCardTop>{"#" + item.id}</StyledCardTop>
+              <StyledImageDiv>
+                <StyledImage src={item.sprites.front_default} alt={item.name} />
+              </StyledImageDiv>
+              <StyledPokemonName>{item.name}</StyledPokemonName>
+            </StyledCard>
           );
         })
       )}
-    </StyledCard>
+    </>
   );
 };
 
