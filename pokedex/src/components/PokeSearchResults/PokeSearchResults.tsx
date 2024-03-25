@@ -1,13 +1,23 @@
+import {
+  StyledSearchButton,
+  StyledSearchBar,
+  StyledSearchOption,
+  StyledSearchBarDiv,
+} from "./styledPokeSearchResults";
+
 const PokeSearchResult = ({ pokemonsData }: any) => {
   return (
-    <div>
-      <h2>Search Results</h2>
-      <ul>
+    <StyledSearchBarDiv>
+      <StyledSearchBar defaultValue="">
+        <option value="" disabled></option>
         {pokemonsData.map((result: any, id: any) => (
-          <li key={id}>{result.name}</li>
+          <StyledSearchOption key={id} value={result.name}>
+            {result.name}
+          </StyledSearchOption> // trying to access to the options style
         ))}
-      </ul>
-    </div>
+      </StyledSearchBar>
+      <StyledSearchButton>Search</StyledSearchButton>
+    </StyledSearchBarDiv>
   );
 };
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import SearchBox from "./components/SearchBox/SearchBox";
 import PokeSearchResult from "./components/PokeSearchResults/PokeSearchResults";
@@ -48,7 +48,6 @@ function App() {
       </div>
       <main>
         <div>
-          <SearchBox setPokemonsData={setPokemonsData} />
           <PokeSearchResult pokemonsData={pokemonsData} />
         </div>
         <StyledCardsContainer>

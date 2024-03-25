@@ -1,25 +1,26 @@
-import Navbar from "../NavBar/NavBar";
-import { styledPageHeader, styledNavBarPages } from "./styledPageHeader";
-
+import Navbar from "../NavBar/NavBar"; // Importing the NavBar component
+import { StyledPageHeader } from "./styledPageHeader";
 type PageHeaderProps = {
-  homePageTitle: string;
+  homePageTitle: string; // Prop for the title of the home page
 };
 
 const PageHeader = ({ homePageTitle }: PageHeaderProps) => {
   return (
-    <header>
+    <StyledPageHeader>
+      {" "}
+      {/* Apply styles to the header */}
       <div>
-        <h1>{homePageTitle}</h1>
+        <img src="pokemonLogo.png" alt="Pokemon" /> {/* Pokemon image */}
       </div>
       <div>
         <Navbar
-          homePageName={"Pokedex"}
-          favoritePageName={"Favorite"}
-          hrefHomePage={""}
-          hrefFavoritePage={""}
+          homePageName={"Pokedex"} // Name for the home page link
+          favoritePageName={"Favorite"} // Name for the favorite page link
+          hrefHomePage={""} // Href for the home page link
+          hrefFavoritePage={""} // Href for the favorite page link
         />
       </div>
-    </header>
+    </StyledPageHeader>
   );
 };
 
