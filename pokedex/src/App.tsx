@@ -1,57 +1,43 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import axios from "axios";
-import SearchBox from "./components/SearchBox/SearchBox";
-import PokeSearchResult from "./components/PokeSearchResults/PokeSearchResults";
+import React, { useState, useEffect, useCallback } from "react";
 import PageHeader from "./components/PageHeader/PageHeader";
+import PokeSearchResult from "./components/PokeSearchResults";
 import PokemonCard from "./components/Card/Card";
 import { StyledCardsContainer } from "./components/PokemonList/styledPokemonList";
-import PokemonList from "./components/PokemonList";
+import { getPokemons, getSpecificPokemon, BASE_URL } from "./utils/api";
 
 function App() {
-  const [pokemonsData, setPokemonsData] = useState([]);
+  const [pokemonsData, setPokemonsData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
-  const [nextUrl, setNextUrl] = useState();
-  const [prevUrl, setPrevUrl] = useState();
+  const [url, setUrl] = useState(BASE_URL);
 
-  const getPokemons = async () => {
-    setLoading(true);
-    const res = await axios.get(url);
-    // console.log(res.data.results);
-    setNextUrl(res.data.next);
-    setPrevUrl(res.data.previous);
-    getSpecificPokemon(res.data.results);
-    setLoading(false);
-  };
-
-  const getSpecificPokemon = useCallback(async (res: any) => {
-    res.map(async (item: any) => {
-      const results = await axios.get(item.url);
-
-      setPokemonsData((state: any) => {
-        state = [...state, results.data];
-        return state;
-      });
-    });
-  }, []);
+  const fetchPokemons = useCallback(async () => {
+    try {
+      setLoading(true);
+      const pokemonUrls = await getPokemons(url);
+      const pokemonData = await getSpecificPokemon(
+        pokemonUrls.map((pokemon) => pokemon.url)
+      );
+      setPokemonsData(pokemonData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [url]);
 
   useEffect(() => {
-    console.log("im here");
-
-    getPokemons();
+    fetchPokemons();
   }, []);
 
   return (
     <div className="App">
-      <div>
-        <PageHeader homePageTitle={"pokedex"} />
-      </div>
+      <PageHeader homePageTitle="pokedex" />
       <main>
         <div>
           <PokeSearchResult pokemonsData={pokemonsData} />
         </div>
         <StyledCardsContainer>
-          <PokemonCard pokemon={pokemonsData} loading={loading} />
+          {!loading && <PokemonCard pokemon={pokemonsData} loading={loading} />}
         </StyledCardsContainer>
       </main>
     </div>

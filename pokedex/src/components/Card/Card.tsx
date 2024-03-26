@@ -6,6 +6,8 @@ import {
   StyledImageDiv,
 } from "./styledCard";
 
+//Add onclick function that will show the card component with more details
+
 const PokemonCard = ({ pokemon, loading }: any) => {
   return (
     <>
@@ -14,7 +16,7 @@ const PokemonCard = ({ pokemon, loading }: any) => {
       ) : (
         pokemon.map((item: any) => {
           return (
-            <StyledCard>
+            <StyledCard key={item.id}>
               <StyledCardTop>{"#" + item.id}</StyledCardTop>
               <StyledImageDiv>
                 <StyledImage src={item.sprites.front_default} alt={item.name} />

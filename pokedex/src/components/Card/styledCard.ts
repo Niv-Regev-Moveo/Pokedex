@@ -10,6 +10,7 @@ export const StyledCard = styled.div`
   box-shadow: 2px 2px 1px 1px rgba(0, 0, 133, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 export const StyledCardTop = styled.div`

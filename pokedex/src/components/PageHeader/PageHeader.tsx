@@ -1,5 +1,6 @@
 import Navbar from "../NavBar/NavBar"; // Importing the NavBar component
-import { StyledPageHeader } from "./styledPageHeader";
+import pokemonLogo from "./pokemonLogo.png";
+import { StyledPageHeader, StyledPokemonLogo } from "./styledPageHeader";
 type PageHeaderProps = {
   homePageTitle: string; // Prop for the title of the home page
 };
@@ -7,10 +8,8 @@ type PageHeaderProps = {
 const PageHeader = ({ homePageTitle }: PageHeaderProps) => {
   return (
     <StyledPageHeader>
-      {" "}
-      {/* Apply styles to the header */}
       <div>
-        <img src="pokemonLogo.png" alt="Pokemon" /> {/* Pokemon image */}
+        <StyledPokemonLogo src={pokemonLogo} alt="./pokemonLogo.png" />{" "}
       </div>
       <div>
         <Navbar
