@@ -1,25 +1,46 @@
 import Navbar from "../NavBar/NavBar";
-import { styledPageHeader, styledNavBarPages } from "./styledPageHeader";
+import pokemonLogo from "./pokemonLogo.png";
+import { StyledPageHeader, StyledPokemonLogo } from "./styledPageHeader";
+import { useNavigate } from "react-router-dom";
 
 type PageHeaderProps = {
   homePageTitle: string;
+  favoritePageName: string;
+  hrefHomePage: string;
+  hrefFavoritePage: string;
 };
 
-const PageHeader = ({ homePageTitle }: PageHeaderProps) => {
+const PageHeader = ({
+  homePageTitle,
+  favoritePageName,
+  hrefHomePage,
+  hrefFavoritePage,
+}: PageHeaderProps) => {
+  const navigate = useNavigate();
+
+  const handleLinkClick = (link: string) => {
+    navigate(link);
+  };
   return (
-    <header>
+    <StyledPageHeader>
       <div>
-        <h1>{homePageTitle}</h1>
+        <StyledPokemonLogo
+          src={pokemonLogo}
+          alt="Pokemon Logo"
+          onClick={() => {
+            handleLinkClick("/");
+          }}
+        />
       </div>
       <div>
         <Navbar
-          homePageName={"Pokedex"}
-          favoritePageName={"Favorite"}
-          hrefHomePage={""}
-          hrefFavoritePage={""}
+          homePageName={homePageTitle}
+          favoritePageName={favoritePageName}
+          hrefHomePage={hrefHomePage}
+          hrefFavoritePage={hrefFavoritePage}
         />
       </div>
-    </header>
+    </StyledPageHeader>
   );
 };
 

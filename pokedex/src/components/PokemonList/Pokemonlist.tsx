@@ -1,6 +1,12 @@
+import { Pokemon } from "../../shared/PokemonType";
 import PokemonCard from "../Card/Card";
 
-const PokemonList = ({ pokemonsData, loading }: any) => {
+type typePokemonListProps = {
+  pokemonsData: Pokemon[];
+  loading: boolean;
+};
+
+const PokemonList = ({ pokemonsData, loading }: typePokemonListProps) => {
   return (
     <div>
       <PokemonCard pokemon={pokemonsData} loading={loading} />
