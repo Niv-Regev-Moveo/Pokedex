@@ -4,6 +4,7 @@ import {
   StyledLinkToPages,
   StyledMarkForLinks,
 } from "./styledNavBar";
+import { useNavigate } from "react-router-dom";
 
 type NavBarProps = {
   homePageName: string;
@@ -20,6 +21,8 @@ const NavBar = ({
 }: NavBarProps) => {
   const [activeLink, setActiveLink] = useState("");
 
+  const navigate = useNavigate();
+
   const handleLinkClick = (link: string) => {
     setActiveLink(link);
   };
@@ -28,22 +31,29 @@ const NavBar = ({
     <nav>
       <StyledPagesLinks>
         <StyledLinkToPages
-          isActive={activeLink === hrefHomePage}
-          onClick={() => handleLinkClick(hrefHomePage)}
+          $isActive={activeLink === hrefHomePage}
+          onClick={() => {
+            handleLinkClick(hrefHomePage);
+            navigate("/");
+          }}
         >
           <StyledMarkForLinks
-            isActive={activeLink === hrefHomePage}
+            $isActive={activeLink === hrefHomePage}
             onClick={() => handleLinkClick(hrefHomePage)}
           >
             {homePageName}
           </StyledMarkForLinks>
         </StyledLinkToPages>
+
         <StyledLinkToPages
-          isActive={activeLink === hrefFavoritePage}
-          onClick={() => handleLinkClick(hrefFavoritePage)}
+          $isActive={activeLink === hrefFavoritePage}
+          onClick={() => {
+            handleLinkClick(hrefFavoritePage);
+            navigate("/favorite");
+          }}
         >
           <StyledMarkForLinks
-            isActive={activeLink === hrefHomePage}
+            $isActive={activeLink === hrefHomePage}
             onClick={() => handleLinkClick(hrefHomePage)}
           >
             {favoritePageName}

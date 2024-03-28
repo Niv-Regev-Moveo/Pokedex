@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/favorite" element={<FavoritePage />} />
+          <Route path="/favorite/:id" element={<FavoritePage />} />
         </Routes>
       </BrowserRouter>
     </>

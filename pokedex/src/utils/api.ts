@@ -1,16 +1,17 @@
 import axios, { AxiosResponse } from "axios";
-
+import { Pokemon } from "../shared/PokemonType";
 export const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
-interface Pokemon {
+interface Pokemons {
   name: string;
   url: string;
 }
 
-export async function getPokemons(url: string): Promise<Pokemon[]> {
+export async function getPokemons(BASE_URL: string): Promise<Pokemons[]> {
   try {
-    const res: AxiosResponse<{ results: Pokemon[] }> = await axios.get(url);
-
+    const res: AxiosResponse<{ results: Pokemons[] }> = await axios.get(
+      BASE_URL
+    );
     return res.data.results;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -18,18 +19,11 @@ export async function getPokemons(url: string): Promise<Pokemon[]> {
   }
 }
 
-export async function getSpecificPokemon(urls: string[]): Promise<any[]> {
+export async function getSpecificPokemon(url: string) {
   try {
-    const pokemonDataPromises: Promise<AxiosResponse<any>>[] = urls.map(
-      async (url) => {
-        const response = await axios.get(url);
-        return response;
-      }
-    );
-    const responses: AxiosResponse<any>[] = await Promise.all(
-      pokemonDataPromises
-    );
-    return responses.map((res) => res.data);
+    const { data }: { data: Pokemon } = await axios.get(url);
+
+    return data;
   } catch (error) {
     console.error("Error fetching specific Pokemon:", error);
     throw error;

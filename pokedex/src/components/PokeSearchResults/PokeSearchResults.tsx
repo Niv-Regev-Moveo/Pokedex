@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DetailedCard from "../DetailedCard";
 import {
   StyledSearchButton,
@@ -7,12 +7,22 @@ import {
   StyledSearchBarDiv,
 } from "./styledPokeSearchResults";
 
+interface Pokemon {
+  id: string;
+  name: string;
+  sprites: {
+    front_default: string;
+  };
+  types: { type: { name: any } }[];
+  stats: { base_stat: number }[];
+}
+
 const PokeSearchResult = ({ pokemonsData }: any) => {
-  const [selectedPokemon, setSelectedPokemon] = useState<any>(null);
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon>();
 
   const onSelect = (selectedName: string) => {
     const selected = pokemonsData.find(
-      (pokemon: any) => pokemon.name === selectedName
+      (pokemon: Pokemon) => pokemon.name === selectedName
     );
     setSelectedPokemon(selected);
   };
@@ -27,7 +37,7 @@ const PokeSearchResult = ({ pokemonsData }: any) => {
           <option value="" disabled>
             Select a Pokémon
           </option>
-          {pokemonsData.map((result: any, id: any) => (
+          {pokemonsData.map((result: Pokemon, id: string) => (
             <StyledSearchOption key={id} value={result.name}>
               {result.name}
             </StyledSearchOption>

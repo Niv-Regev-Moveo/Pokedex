@@ -12,4 +12,5 @@ export const StyledPokemonLogo = styled.img`
   height: 35%;
   padding: 5px;
   margin-left: 50px;
+  cursor: pointer;
 `;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   StyledCard,
   StyledCardTop,
@@ -6,27 +6,42 @@ import {
   StyledPokemonName,
   StyledImageDiv,
 } from "./styledCard";
+import { Pokemon } from "../../shared/PokemonType";
 
-//Add onclick function that will show the card component with more details
+type PokemonDataProps = {
+  pokemon: Pokemon[];
+  loading: boolean;
+};
 
-const PokemonCard = ({ pokemon, loading }: any) => {
-  const handleClick = () => {
-    console.log("hello hello");
+const PokemonCard = ({ pokemon, loading }: PokemonDataProps) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = (id: string) => {
+    navigate(`/favorite/${id}`);
   };
+  console.log(pokemon);
 
   return (
     <>
       {loading ? (
         <h1> Loading...</h1>
       ) : (
-        pokemon.map((item: any) => {
+        pokemon.map((pokemon: Pokemon) => {
           return (
-            <StyledCard key={item.id} onClick={handleClick}>
-              <StyledCardTop>{"#" + item.id}</StyledCardTop>
+            <StyledCard
+              key={pokemon.id}
+              onClick={() => {
+                handleCardClick(pokemon.id);
+              }}
+            >
+              <StyledCardTop>{"#" + pokemon.id}</StyledCardTop>
               <StyledImageDiv>
-                <StyledImage src={item.sprites.front_default} alt={item.name} />
+                <StyledImage
+                  src={pokemon.sprites.front_default}
+                  alt={pokemon.name}
+                />
               </StyledImageDiv>
-              <StyledPokemonName>{item.name}</StyledPokemonName>
+              <StyledPokemonName>{pokemon.name}</StyledPokemonName>
             </StyledCard>
           );
         })

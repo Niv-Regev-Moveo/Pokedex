@@ -1,14 +1,12 @@
+import { Pokemon } from "../../shared/PokemonType";
 import PokemonCard from "../Card/Card";
 
 type typePokemonListProps = {
-  pokemonsData: any[];
+  pokemonsData: Pokemon[];
   loading: boolean;
 };
 
-const PokemonList: React.FC<typePokemonListProps> = ({
-  pokemonsData,
-  loading,
-}) => {
+const PokemonList = ({ pokemonsData, loading }: typePokemonListProps) => {
   return (
     <div>
       <PokemonCard pokemon={pokemonsData} loading={loading} />
