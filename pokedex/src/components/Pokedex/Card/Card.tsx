@@ -6,7 +6,7 @@ import {
   StyledPokemonName,
   StyledImageDiv,
 } from "./styledCard";
-import { Pokemon } from "../../shared/PokemonType";
+import { Pokemon } from "../../../shared/PokemonType";
 
 type PokemonDataProps = {
   pokemon: Pokemon[];
@@ -19,7 +19,6 @@ const PokemonCard = ({ pokemon, loading }: PokemonDataProps) => {
   const handleCardClick = (id: string) => {
     navigate(`/favorite/${id}`);
   };
-  console.log(pokemon);
 
   return (
     <>

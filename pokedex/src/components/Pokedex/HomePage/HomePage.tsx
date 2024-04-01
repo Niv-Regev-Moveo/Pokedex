@@ -4,9 +4,9 @@ import PageHeader from "../PageHeader/PageHeader";
 import PokeSearchResult from "../PokeSearchResults/PokeSearchResults";
 import PokemonCard from "../Card/Card";
 import { StyledCardsContainer } from "../PokemonList/styledPokemonList";
-import { getSpecificPokemon, BASE_URL } from "../../utils/api";
+import { getSpecificPokemon, BASE_URL } from "../../../utils/api";
 import { StyledButton, ButtonsContainer } from "./styledHomePage";
-import { Pokemon } from "../../shared/PokemonType";
+import { Pokemon } from "../../../shared/PokemonType";
 
 interface PokemonUrlProps {
   name: string;
@@ -67,10 +67,10 @@ function HomePage() {
   return (
     <div className="App">
       <PageHeader
-        homePageTitle="pokedex"
-        favoritePageName="Favorite"
+        homePageTitle="Home"
+        myMapPageName="My Map"
         hrefHomePage=""
-        hrefFavoritePage=""
+        hrefMyMapPage=""
       />
       <main>
         <div>

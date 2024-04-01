@@ -9,7 +9,10 @@ interface StyledMarkForLinksProps {
 }
 
 export const StyledLinkToPages = styled.li<StyledLinkToPagesProps>`
-  padding: 10px;
+  min-width: 60px;
+  height: 100%;
+  padding: 15px;
+  text-align: center;
   background-color: ${(props) => (props.$isActive ? "#020166" : "transparent")};
   cursor: pointer;
 
@@ -32,5 +35,4 @@ export const StyledPagesLinks = styled.ul`
   display: flex;
   justify-content: space-around;
   margin: 0;
-  padding-right: 100px;
 `;

@@ -8,16 +8,16 @@ import { useNavigate } from "react-router-dom";
 
 type NavBarProps = {
   homePageName: string;
-  favoritePageName: string;
+  myMapPageName: string;
   hrefHomePage: string;
-  hrefFavoritePage: string;
+  hrefMyMapPage: string;
 };
 
 const NavBar = ({
-  homePageName,
-  favoritePageName,
-  hrefHomePage,
-  hrefFavoritePage,
+  homePageName = "Home",
+  myMapPageName = "My-Map",
+  hrefHomePage = "",
+  hrefMyMapPage = "",
 }: NavBarProps) => {
   const [activeLink, setActiveLink] = useState("");
 
@@ -46,17 +46,17 @@ const NavBar = ({
         </StyledLinkToPages>
 
         <StyledLinkToPages
-          $isActive={activeLink === hrefFavoritePage}
+          $isActive={activeLink === hrefMyMapPage}
           onClick={() => {
-            handleLinkClick(hrefFavoritePage);
-            navigate("/favorite");
+            handleLinkClick(hrefMyMapPage);
+            navigate("/My-Map");
           }}
         >
           <StyledMarkForLinks
             $isActive={activeLink === hrefHomePage}
             onClick={() => handleLinkClick(hrefHomePage)}
           >
-            {favoritePageName}
+            {myMapPageName}
           </StyledMarkForLinks>
         </StyledLinkToPages>
       </StyledPagesLinks>

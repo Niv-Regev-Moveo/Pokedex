@@ -1,7 +1,7 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./components/HomePage/HomePage";
-import FavoritePage from "./components/FavoritePage";
+import HomePage from "./components/Pokedex/HomePage/HomePage";
+import FavoritePage from "./components/Pokedex/FavoritePage";
+import MyMapPage from "./components/GoogleMap/MyMapPage";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/favorite/:id" element={<FavoritePage />} />
+          <Route path="/My-Map" element={<MyMapPage isLoad={true} />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import DetailedCard from "../DetailedCard";
 import { useState, useEffect } from "react";
 import { StyledArrowToHomePage } from "./styledFavoritePage";
-import { Pokemon } from "../../shared/PokemonType";
+import { Pokemon } from "../../../shared/PokemonType";
 import { PokemonBackgroundColor } from "../DetailedCard/styledDetailedCard";
 
 interface PokemonWithCorrectTypes extends Pokemon {
@@ -33,10 +33,10 @@ const FavoritePage = () => {
   return (
     <div className="App">
       <PageHeader
-        homePageTitle="pokedex"
-        favoritePageName="Favorite"
+        homePageTitle={"pokedex"}
+        myMapPageName="Favorite"
         hrefHomePage=""
-        hrefFavoritePage=""
+        hrefMyMapPage=""
       />
       <main>
         <div>

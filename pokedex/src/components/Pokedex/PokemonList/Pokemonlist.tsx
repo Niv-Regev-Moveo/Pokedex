@@ -1,4 +1,4 @@
-import { Pokemon } from "../../shared/PokemonType";
+import { Pokemon } from "../../../shared/PokemonType";
 import PokemonCard from "../Card/Card";
 
 type typePokemonListProps = {
