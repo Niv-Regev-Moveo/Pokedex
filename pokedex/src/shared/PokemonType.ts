@@ -7,4 +7,5 @@ export interface Pokemon {
   };
   types: { type: { name: string } }[];
   stats: { base_stat: number }[];
+  location: { latitude: number; longitude: number };
 }

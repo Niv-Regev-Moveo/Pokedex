@@ -4,7 +4,12 @@ import PageHeader from "../PageHeader/PageHeader";
 import PokeSearchResult from "../PokeSearchResults/PokeSearchResults";
 import PokemonCard from "../Card/Card";
 import { StyledCardsContainer } from "../PokemonList/styledPokemonList";
-import { getSpecificPokemon, BASE_URL } from "../../../utils/api";
+import {
+  getSpecificPokemon,
+  BASE_URL,
+  setPokemonToLocalStorage,
+  removePokemonFromLocalStorage,
+} from "../../../utils/api";
 import { StyledButton, ButtonsContainer } from "./styledHomePage";
 import { Pokemon } from "../../../shared/PokemonType";
 
@@ -38,8 +43,8 @@ function HomePage() {
         async (specificUrlData) => await getSpecificPokemon(specificUrlData.url)
       );
       const pokemonData = await Promise.all(returnedPokemonsData);
-
       setPokemonsData(pokemonData);
+      setPokemonToLocalStorage(url, pokemonData);
       setNextUrl(next);
       setPrevUrl(previous);
     } catch (error) {
@@ -56,11 +61,15 @@ function HomePage() {
   const handlePrevClick = () => {
     if (prevUrl) {
       setUrl(prevUrl);
+      setPokemonToLocalStorage(prevUrl, pokemonsData);
+      removePokemonFromLocalStorage(url);
     }
   };
   const handleNextClick = () => {
     if (nextUrl) {
       setUrl(nextUrl);
+      setPokemonToLocalStorage(nextUrl, pokemonsData);
+      removePokemonFromLocalStorage(url);
     }
   };
 

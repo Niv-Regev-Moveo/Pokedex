@@ -1,6 +1,6 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useMemo } from "react";
 import { StyledMpContainer } from "./styledMap";
-import { GoogleMap, GoogleMapProps } from "@react-google-maps/api";
+import { GoogleMap, GoogleMapProps, Marker } from "@react-google-maps/api";
 
 interface MapProps {
   isLoadedMap: boolean;
@@ -8,6 +8,14 @@ interface MapProps {
 
 const Map = ({ isLoadedMap, ...props }: MapProps & GoogleMapProps) => {
   const [map, setMap] = useState(null);
+
+  const center = useMemo(
+    () => ({
+      lat: 32.0647,
+      lng: 34.7717,
+    }),
+    []
+  );
 
   const onLoad = useCallback(function callback(map: any) {
     const bounds = new window.google.maps.LatLngBounds(center);
@@ -21,21 +29,20 @@ const Map = ({ isLoadedMap, ...props }: MapProps & GoogleMapProps) => {
     height: "500px",
   };
 
-  const center = {
-    lat: 32.064867,
-    lng: 34.771378,
-  };
-
   return isLoadedMap ? (
-    <StyledMpContainer>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={16}
-        onLoad={onLoad}
-        {...props}
-      />
-    </StyledMpContainer>
+    <>
+      <StyledMpContainer>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={10}
+          onLoad={onLoad}
+          {...props}
+        >
+          <Marker position={center} />
+        </GoogleMap>
+      </StyledMpContainer>
+    </>
   ) : null;
 };
 

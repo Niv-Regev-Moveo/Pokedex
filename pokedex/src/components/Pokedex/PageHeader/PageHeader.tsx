@@ -1,4 +1,4 @@
-import Navbar from "../NavBar/NavBar";
+import Navbar from "./NavBar/NavBar";
 import pokemonLogo from "./pokemonLogo.png";
 import { StyledPageHeader, StyledPokemonLogo } from "./styledPageHeader";
 import { useNavigate } from "react-router-dom";
