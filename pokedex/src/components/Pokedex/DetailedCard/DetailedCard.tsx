@@ -47,8 +47,7 @@ const DetailedCard = ({ pokemon }: DetailedCardProps) => {
       </StyledLeftSideCard>
       <StyledRightSideCard>
         <StyledDescription>
-          {/* <h3>Description: {pokemon.location.longitude}</h3>
-          <p>Description: {pokemon.location.latitude}</p> */}
+          <h3> {pokemon.name}</h3>
         </StyledDescription>
         <StyledStatsDetails>
           <div>
