@@ -54,23 +54,27 @@ export const setPokemonToLocalStorage = (
   pokemonData: Pokemon[]
 ) => {
   try {
-    const pokemonWithLocations = pokemonData.map((pokemon: Pokemon) => {
-      const randomLocation = getRandomLocationInTelAviv(3);
-      return {
-        ...pokemon,
-        location: randomLocation,
-      };
-    });
-    window.localStorage.setItem(id, JSON.stringify(pokemonWithLocations));
-    console.log(pokemonWithLocations);
+    let existingPokemonLocations = getPokemonFromLocalStorage(id);
+
+    if (!existingPokemonLocations) {
+      // If no existing data, generate new locations
+      existingPokemonLocations = pokemonData.map(() => {
+        const randomLocation = getRandomLocationInTelAviv(3);
+        return {
+          id,
+          location: randomLocation,
+        };
+      });
+    }
+
+    window.localStorage.setItem(id, JSON.stringify(existingPokemonLocations));
   } catch (error) {
     console.log(error);
   }
 };
-
-export const getPokemonFromLocalStorage = (id: string) => {
+export const getPokemonFromLocalStorage = (pokemonName: string) => {
   try {
-    const pokemonFromLocalStorage = window.localStorage.getItem(id);
+    const pokemonFromLocalStorage = window.localStorage.getItem(pokemonName);
     return pokemonFromLocalStorage
       ? JSON.parse(pokemonFromLocalStorage)
       : undefined;
@@ -79,6 +83,23 @@ export const getPokemonFromLocalStorage = (id: string) => {
   }
 
   return getPokemonFromLocalStorage;
+};
+
+export const getPokemonLocationFromLocalStorage = (pokemonName: string) => {
+  try {
+    const pokemonFromLocalStorage = window.localStorage.getItem(pokemonName);
+    if (pokemonFromLocalStorage) {
+      const parsedPokemon = JSON.parse(pokemonFromLocalStorage);
+      const { latitude, longitude } = parsedPokemon.location;
+      const pokemonLocationForUse = { latitude, longitude };
+      return pokemonLocationForUse;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 export const removePokemonFromLocalStorage = (id: string) => {

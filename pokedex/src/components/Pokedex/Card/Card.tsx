@@ -7,17 +7,53 @@ import {
   StyledImageDiv,
 } from "./styledCard";
 import { Pokemon } from "../../../shared/PokemonType";
+import { getRandomLocationInTelAviv } from "../../../utils/api";
 
 type PokemonDataProps = {
   pokemon: Pokemon[];
   loading: boolean;
 };
 
+interface PokemonLocation {
+  latitude: number;
+  longitude: number;
+}
+
+const setPokemonToLocalStorage = (pokemonData: Pokemon) => {
+  try {
+    const existingData = window.localStorage.getItem(pokemonData.name);
+    let location: PokemonLocation | null = null;
+
+    if (existingData) {
+      const parsedData: { name: string; location: PokemonLocation } =
+        JSON.parse(existingData);
+      location = parsedData.location;
+    } else {
+      const randomLocation = getRandomLocationInTelAviv(2);
+      location = {
+        latitude: randomLocation.latitude,
+        longitude: randomLocation.longitude,
+      };
+      const dataToStore = {
+        name: pokemonData.name,
+        location: location,
+      };
+      window.localStorage.setItem(
+        pokemonData.name,
+        JSON.stringify(dataToStore)
+      );
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const PokemonCard = ({ pokemon, loading }: PokemonDataProps) => {
   const navigate = useNavigate();
 
-  const handleCardClick = (id: string) => {
-    navigate(`/favorite/${id}`);
+  const handleCardClick = (clickedPokemon: Pokemon) => {
+    setPokemonToLocalStorage(clickedPokemon);
+    navigate(`/favorite/${clickedPokemon.name}`);
   };
 
   return (
@@ -25,25 +61,21 @@ const PokemonCard = ({ pokemon, loading }: PokemonDataProps) => {
       {loading ? (
         <h1> Loading...</h1>
       ) : (
-        pokemon.map((pokemon: Pokemon) => {
-          return (
-            <StyledCard
-              key={pokemon.id}
-              onClick={() => {
-                handleCardClick(pokemon.id);
-              }}
-            >
-              <StyledCardTop>{"#" + pokemon.id}</StyledCardTop>
-              <StyledImageDiv>
-                <StyledImage
-                  src={pokemon.sprites.front_default}
-                  alt={pokemon.name}
-                />
-              </StyledImageDiv>
-              <StyledPokemonName>{pokemon.name}</StyledPokemonName>
-            </StyledCard>
-          );
-        })
+        pokemon.map((pokemon: Pokemon) => (
+          <StyledCard
+            key={pokemon.name}
+            onClick={() => handleCardClick(pokemon)}
+          >
+            <StyledCardTop>{"#" + pokemon.id}</StyledCardTop>
+            <StyledImageDiv>
+              <StyledImage
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+              />
+            </StyledImageDiv>
+            <StyledPokemonName>{pokemon.name}</StyledPokemonName>
+          </StyledCard>
+        ))
       )}
     </>
   );

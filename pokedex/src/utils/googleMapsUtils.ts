@@ -16,9 +16,20 @@ export const loadMapApi = () => {
   return googleMapScript;
 };
 
-// const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string;
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string;
 
 export const mapOptions = {
-  // googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+  googleMapsApiKey: GOOGLE_MAPS_API_KEY,
   idForGoogleMaps: "acquired-goods-418614",
+};
+
+export const getPokemonFromLocalStorage = (id: string) => {
+  try {
+    const pokemonFromLocalStorage = window.localStorage.getItem(id);
+    return pokemonFromLocalStorage
+      ? JSON.parse(pokemonFromLocalStorage)
+      : undefined;
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./components/Pokedex/HomePage/HomePage";
+import HomePage from "./components/Pokedex/HomePage";
 import FavoritePage from "./components/Pokedex/FavoritePage";
 import MyMapPage from "./components/GoogleMap/MyMapPage";
 

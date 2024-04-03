@@ -1,4 +1,5 @@
 export interface Pokemon {
+  lat(lat: any): number | (() => number);
   url: string;
   id: string;
   name: string;

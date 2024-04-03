@@ -17,6 +17,9 @@ interface PokemonUrlProps {
   name: string;
   url: string;
 }
+interface PokemonNames {
+  name: string;
+}
 
 function HomePage() {
   const [pokemonsData, setPokemonsData] = useState<Pokemon[]>([]);
@@ -44,7 +47,6 @@ function HomePage() {
       );
       const pokemonData = await Promise.all(returnedPokemonsData);
       setPokemonsData(pokemonData);
-      setPokemonToLocalStorage(url, pokemonData);
       setNextUrl(next);
       setPrevUrl(previous);
     } catch (error) {
