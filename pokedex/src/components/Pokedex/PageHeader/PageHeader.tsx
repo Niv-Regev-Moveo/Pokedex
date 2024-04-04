@@ -1,20 +1,20 @@
-import Navbar from "../NavBar/NavBar";
+import Navbar from "./NavBar/NavBar";
 import pokemonLogo from "./pokemonLogo.png";
 import { StyledPageHeader, StyledPokemonLogo } from "./styledPageHeader";
 import { useNavigate } from "react-router-dom";
 
 type PageHeaderProps = {
   homePageTitle: string;
-  favoritePageName: string;
+  myMapPageName: string;
   hrefHomePage: string;
-  hrefFavoritePage: string;
+  hrefMyMapPage: string;
 };
 
 const PageHeader = ({
   homePageTitle,
-  favoritePageName,
+  myMapPageName,
   hrefHomePage,
-  hrefFavoritePage,
+  hrefMyMapPage,
 }: PageHeaderProps) => {
   const navigate = useNavigate();
 
@@ -35,9 +35,9 @@ const PageHeader = ({
       <div>
         <Navbar
           homePageName={homePageTitle}
-          favoritePageName={favoritePageName}
+          myMapPageName={myMapPageName}
           hrefHomePage={hrefHomePage}
-          hrefFavoritePage={hrefFavoritePage}
+          hrefMyMapPage={hrefMyMapPage}
         />
       </div>
     </StyledPageHeader>

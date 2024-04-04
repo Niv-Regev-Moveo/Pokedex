@@ -15,6 +15,7 @@ interface Pokemon {
   };
   types: { type: { name: any } }[];
   stats: { base_stat: number }[];
+  location: { latitude: number; longitude: number };
 }
 
 const PokeSearchResult = ({ pokemonsData }: any) => {

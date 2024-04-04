@@ -19,6 +19,7 @@ interface Pokemon {
   };
   types: { type: { name: PokemonBackgroundColor } }[];
   stats: { base_stat: number }[];
+  location: { latitude: number; longitude: number };
 }
 
 interface DetailedCardProps {
@@ -46,8 +47,7 @@ const DetailedCard = ({ pokemon }: DetailedCardProps) => {
       </StyledLeftSideCard>
       <StyledRightSideCard>
         <StyledDescription>
-          <h3>Description</h3>
-          <p>Description: {}</p>
+          <h3> {pokemon.name}</h3>
         </StyledDescription>
         <StyledStatsDetails>
           <div>

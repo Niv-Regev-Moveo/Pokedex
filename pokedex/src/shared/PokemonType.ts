@@ -1,4 +1,5 @@
 export interface Pokemon {
+  lat(lat: any): number | (() => number);
   url: string;
   id: string;
   name: string;
@@ -7,4 +8,5 @@ export interface Pokemon {
   };
   types: { type: { name: string } }[];
   stats: { base_stat: number }[];
+  location: { latitude: number; longitude: number };
 }
